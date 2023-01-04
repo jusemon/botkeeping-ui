@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Badge,
   Box,
   CssBaseline,
   Container,
@@ -17,7 +16,6 @@ import {
 import {
   Menu as MenuIcon,
   ChevronLeft as ChevronLeftIcon,
-  Notifications as NotificationsIcon,
   SmartToy as SmartToyIcon,
   Task as TaskIcon,
 } from '@mui/icons-material';
@@ -76,11 +74,6 @@ const App = () => {
           >
             Botkeeping
           </Typography>
-          <IconButton color='inherit'>
-            <Badge badgeContent={4} color='secondary'>
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer variant='permanent' open={open}>
