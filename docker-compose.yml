@@ -1,0 +1,8 @@
+name: botkeeping
+
+services:
+  ui:
+    build:
+      context: .
+    ports:
+      - 82:80
