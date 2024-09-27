@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef, useState } from 'react';
 import {
   Box,
   CssBaseline,
@@ -34,12 +34,12 @@ import {
 } from 'react-router-dom';
 import BotsForm from './features/bots/BotsForm';
 
-const LinkBehavior = React.forwardRef<HTMLAnchorElement, RouterLinkProps>(
+const LinkBehavior = forwardRef<HTMLAnchorElement, RouterLinkProps>(
   (props, ref) => <NavLink ref={ref} {...props} />
 );
 
 const App = () => {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };

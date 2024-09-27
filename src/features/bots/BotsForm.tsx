@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, Fragment } from 'react';
 import axios, { AxiosError } from 'axios';
 import {
   Alert,
@@ -21,13 +21,13 @@ import Title from '../ui/Title';
 import { useNavigate } from 'react-router-dom';
 
 export default function BotsForm() {
-  const [errors, setErrors] = React.useState<ReadonlyArray<string>>([]);
-  const [open, setOpen] = React.useState(false);
-  const [bot, setBot] = React.useState<PostBotRequestBody>({
+  const [errors, setErrors] = useState<ReadonlyArray<string>>([]);
+  const [open, setOpen] = useState(false);
+  const [bot, setBot] = useState<PostBotRequestBody>({
     name: '',
   });
-  const [botResponse, setBotResponse] = React.useState<BotResponse>();
-  const [isLoading, setLoading] = React.useState(false);
+  const [botResponse, setBotResponse] = useState<BotResponse>();
+  const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleAlertClose = () => {
@@ -56,12 +56,12 @@ export default function BotsForm() {
   };
 
   return (
-    <React.Fragment>
+    <Fragment>
       {errors &&
         errors.map((error, index) => (
           <Alert
             severity='error'
-            onClose={() => setErrors([...errors.filter((e, i) => i !== index)])}
+            onClose={() => setErrors([...errors.filter((_, i) => i !== index)])}
           >
             {error}
           </Alert>
@@ -120,9 +120,9 @@ export default function BotsForm() {
           <DialogContentText id='alert-dialog-description'>
             The bot has been saved with the following tasks:
             {botResponse?.tasks.map((t) => (
-              <React.Fragment key={t.id}>
+              <Fragment key={t.id}>
                 <br />- {t.description}
-              </React.Fragment>
+              </Fragment>
             ))}
           </DialogContentText>
         </DialogContent>
@@ -132,6 +132,6 @@ export default function BotsForm() {
           </Button>
         </DialogActions>
       </Dialog>
-    </React.Fragment>
+    </Fragment>
   );
 }

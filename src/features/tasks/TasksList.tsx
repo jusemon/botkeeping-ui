@@ -1,6 +1,5 @@
 import * as React from 'react';
 import axios from 'axios';
-import qs from 'query-string';
 
 import { API } from '../../config/constants';
 import { Response, TaskResponse } from '../../models/http';
@@ -13,9 +12,9 @@ const columns: CustomTableColumns = [
     property: 'id',
     props: {
       style: {
-        width: 100
-      }
-    }
+        width: 100,
+      },
+    },
   },
   {
     title: 'Description',
@@ -45,9 +44,7 @@ const columns: CustomTableColumns = [
 ];
 
 export default function TasksList() {
-  const [tasks, setTasks] = React.useState<ReadonlyArray<TaskResponse>>(
-    []
-  );
+  const [tasks, setTasks] = React.useState<ReadonlyArray<TaskResponse>>([]);
   const [totalElements, setTotalElements] = React.useState(0);
   const [isLoading, setLoading] = React.useState(false);
   const [pagination, setPagination] = React.useState({
@@ -62,10 +59,9 @@ export default function TasksList() {
   const getTasks = React.useCallback(async () => {
     setLoading(true);
     try {
-      const params = qs.stringify(pagination);
-      const response = await axios.get<Response<TaskResponse>>(
-        `${API}tasks?` + params
-      );
+      const response = await axios.get<Response<TaskResponse>>(`${API}tasks`, {
+        params: pagination,
+      });
       const { data, totalElements: total } = response.data;
       setTotalElements(total);
       setTasks(

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, Fragment } from 'react';
 import {
   Box,
   CircularProgress,
@@ -54,12 +54,12 @@ const MasterDetailRow = (props: {
   details: DetailsConfig;
 }) => {
   const { row, columns, details } = props;
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
-    <React.Fragment>
+    <Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-        <TableCell style={{width: 66}}>
+        <TableCell style={{ width: 66 }}>
           <IconButton
             aria-label='expand row'
             size='small'
@@ -69,10 +69,7 @@ const MasterDetailRow = (props: {
           </IconButton>
         </TableCell>
         {columns.map((col) => (
-          <TableCell
-            key={`${row.id}-${col.property}`}
-            {...col.props}
-          >
+          <TableCell key={`${row.id}-${col.property}`} {...col.props}>
             {row[col.property]}
           </TableCell>
         ))}
@@ -88,7 +85,9 @@ const MasterDetailRow = (props: {
                 <TableHead>
                   <TableRow>
                     {details.columns.map((col) => (
-                      <TableCell key={col.property} {...col.props}>{col.title}</TableCell>
+                      <TableCell key={col.property} {...col.props}>
+                        {col.title}
+                      </TableCell>
                     ))}
                   </TableRow>
                 </TableHead>
@@ -111,7 +110,7 @@ const MasterDetailRow = (props: {
           </Collapse>
         </TableCell>
       </TableRow>
-    </React.Fragment>
+    </Fragment>
   );
 };
 
@@ -123,8 +122,8 @@ const CustomTable = ({
   isLoading,
   details,
 }: CustomTableProps) => {
-  const [page, setPage] = React.useState(0);
-  const [pageSize, setPageSize] = React.useState(10);
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
 
   const handleChangePage = (
     _event: React.MouseEvent<HTMLButtonElement> | null,

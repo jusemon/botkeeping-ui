@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { MouseEvent } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
@@ -11,37 +11,28 @@ type CustomTablePaginationActionsProps = {
   count: number;
   page: number;
   rowsPerPage: number;
-  onPageChange: (
-    event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
-  ) => void;
-}
+  onPageChange: (event: MouseEvent<HTMLButtonElement>, newPage: number) => void;
+};
 
-const CustomTablePaginationActions = (props: CustomTablePaginationActionsProps) => {
+const CustomTablePaginationActions = (
+  props: CustomTablePaginationActionsProps
+) => {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
 
-  const handleFirstPageButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
+  const handleFirstPageButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
     onPageChange(event, 0);
   };
 
-  const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
+  const handleBackButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
     onPageChange(event, page - 1);
   };
 
-  const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
+  const handleNextButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
     onPageChange(event, page + 1);
   };
 
-  const handleLastPageButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
+  const handleLastPageButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
     onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
   };
 

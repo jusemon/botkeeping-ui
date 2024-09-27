@@ -1,6 +1,5 @@
 import * as React from 'react';
 import axios from 'axios';
-import qs from 'query-string';
 import dayjs from 'dayjs';
 import { Button, Grid } from '@mui/material';
 import { Create as CreateIcon } from '@mui/icons-material';
@@ -57,10 +56,9 @@ export default function BotsList() {
   const getBots = React.useCallback(async () => {
     setLoading(true);
     try {
-      const params = qs.stringify(pagination);
-      const response = await axios.get<Response<BotResponse>>(
-        `${API}bots?` + params
-      );
+      const response = await axios.get<Response<BotResponse>>(`${API}bots`, {
+        params: pagination,
+      });
       const { data, totalElements: total } = response.data;
       setTotalElements(total);
       setBots(
@@ -70,7 +68,9 @@ export default function BotsList() {
           tasks: (bot.tasks || []).map((task) => ({
             ...task,
             isActive: task.isActive ? 'Yes' : 'No',
-            completedAt: task.completedAt ? dayjs(task.completedAt).format('L LT') : '',
+            completedAt: task.completedAt
+              ? dayjs(task.completedAt).format('L LT')
+              : '',
           })),
         }))
       );
